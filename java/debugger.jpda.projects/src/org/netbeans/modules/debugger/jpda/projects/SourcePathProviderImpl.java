@@ -202,14 +202,16 @@ public class SourcePathProviderImpl extends SourcePathProvider {
             );
              */
             String listeningCP = (String) properties.get("listeningCP");
+            String sourcepathSeperator = ",";
             if (listeningCP != null) {
                 boolean isSourcepath = false;
                 if ("sourcepath".equalsIgnoreCase(listeningCP)) {
+                    sourcepathSeperator = File.pathSeparator;
                     listeningCP = ((ClassPath) properties.get ("sourcepath")).toString(ClassPath.PathConversionMode.SKIP);
                     isSourcepath = true;
                 }
                 srcRootsToListenForArtifactsUpdates = new HashSet<FileObject>();
-                for (String cp : listeningCP.split(File.pathSeparator)) {
+                for (String cp : listeningCP.split(sourcepathSeperator)) {
                     logger.log(Level.FINE, "Listening cp = ''{0}''", cp);
                     File f = new File(cp);
                     f = FileUtil.normalizeFile(f);
