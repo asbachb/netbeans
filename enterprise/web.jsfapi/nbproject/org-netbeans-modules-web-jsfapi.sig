@@ -123,12 +123,11 @@ meth public abstract java.lang.String getName()
 meth public abstract java.lang.String getSignature()
 
 CLSS public abstract interface org.netbeans.modules.web.jsfapi.api.JsfSupport
-meth public abstract boolean isJsf22Plus()
-meth public abstract boolean isJsf30Plus()
 meth public abstract java.util.Map<java.lang.String,? extends org.netbeans.modules.web.jsfapi.api.Library> getLibraries()
 meth public abstract org.netbeans.api.java.classpath.ClassPath getClassPath()
 meth public abstract org.netbeans.api.project.Project getProject()
 meth public abstract org.netbeans.modules.web.api.webmodule.WebModule getWebModule()
+meth public abstract org.netbeans.modules.web.jsfapi.api.JsfVersion getJsfVersion()
 meth public abstract org.netbeans.modules.web.jsfapi.api.Library getLibrary(java.lang.String)
 meth public abstract org.openide.util.Lookup getLookup()
 
@@ -151,6 +150,7 @@ fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_4_0
 meth public boolean isAtLeast(org.netbeans.modules.web.jsfapi.api.JsfVersion)
  anno 1 org.netbeans.api.annotations.common.NonNull()
 meth public java.lang.String getShortName()
+meth public static org.netbeans.modules.web.jsfapi.api.JsfVersion latest()
 meth public static org.netbeans.modules.web.jsfapi.api.JsfVersion valueOf(java.lang.String)
 meth public static org.netbeans.modules.web.jsfapi.api.JsfVersion[] values()
 supr java.lang.Enum<org.netbeans.modules.web.jsfapi.api.JsfVersion>

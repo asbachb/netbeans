@@ -172,22 +172,20 @@ public class JsfSupportImpl implements JsfSupport {
             }
         });
 
-        if(isJsf30Plus()){
+        JsfVersion jsfVersion = getJsfVersion();
+        
+        //TODO do it lazy so it creates the web beans model lazily once looked up
+        InstanceContent ic = new InstanceContent();
+        if(jsfVersion.isAtLeast(JsfVersion.JSF_3_0)){
             webBeansModelJakarta = new org.netbeans.modules.jakarta.web.beans.MetaModelSupport(project).getMetaModel();
+            ic.add(webBeansModelJakarta);
         } else {
             webBeansModel = new org.netbeans.modules.web.beans.MetaModelSupport(project).getMetaModel();
+            ic.add(webBeansModel);
         }
         
         //init lookup
-        //TODO do it lazy so it creates the web beans model lazily once looked up
-        InstanceContent ic = new InstanceContent();
-        if(isJsf30Plus()){
-            ic.add(webBeansModelJakarta);
-        } else {
-            ic.add(webBeansModel);
-        }
         this.lookup = new AbstractLookup(ic);
-
     }
 
     @Override
@@ -269,25 +267,15 @@ public class JsfSupportImpl implements JsfSupport {
     }
 
     @Override
-    public boolean isJsf22Plus() {
+    public JsfVersion getJsfVersion() {
         if (wm != null) {
-            JsfVersion version = JsfVersionUtils.forWebModule(wm);
-            // caching is done inside the method
-            return version != null && version.isAtLeast(JsfVersion.JSF_2_2);
+            JsfVersion jsfVersion = JsfVersionUtils.forWebModule(wm);
+            if (jsfVersion != null) {
+                return jsfVersion;
+            }
         }
-        // return the latest supported one until somebody will complain about that
-        return true;
-    }
 
-		@Override
-    public boolean isJsf30Plus() {
-        if (wm != null) {
-            JsfVersion version = JsfVersionUtils.forWebModule(wm);
-            // caching is done inside the method
-            return version != null && version.isAtLeast(JsfVersion.JSF_3_0);
-        }
-        // return the latest supported one until somebody will complain about that
-        return true;
+        return JsfVersion.latest();
     }
 
     @Override

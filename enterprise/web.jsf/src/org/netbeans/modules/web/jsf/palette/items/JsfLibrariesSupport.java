@@ -37,6 +37,7 @@ import org.netbeans.modules.parsing.spi.Parser;
 import org.netbeans.modules.web.common.api.WebUtils;
 import org.netbeans.modules.web.jsfapi.api.DefaultLibraryInfo;
 import org.netbeans.modules.web.jsfapi.api.JsfSupport;
+import org.netbeans.modules.web.jsfapi.api.JsfVersion;
 import org.netbeans.modules.web.jsfapi.api.Library;
 import org.netbeans.modules.web.jsfapi.spi.JsfSupportProvider;
 import org.netbeans.modules.web.jsfapi.spi.LibraryUtils;
@@ -130,7 +131,7 @@ public class JsfLibrariesSupport {
                 toimport.put(limport.lib, null); //lets use the default prefix
             }
         }
-        LibraryUtils.importLibrary(tc.getDocument(), toimport, jsfs.isJsf22Plus());
+        LibraryUtils.importLibrary(tc.getDocument(), toimport, jsfs.getJsfVersion().isAtLeast(JsfVersion.JSF_2_2));
     }
 
     /** @return the library default prefix in the case it hasn't been declared yet or the declared prefix */
@@ -142,12 +143,8 @@ public class JsfLibrariesSupport {
         return limport.declaredPrefix != null ? limport.declaredPrefix : limport.lib.getDefaultPrefix();
     }
 
-    public boolean isJsf22Plus() {
-        return jsfs.isJsf22Plus();
-    }
-
-    public boolean isJsf30Plus() {
-        return jsfs.isJsf30Plus();
+    public JsfVersion getJsfVersion() {
+        return jsfs.getJsfVersion();
     }
 
     private static class LibraryImport {

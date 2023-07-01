@@ -49,4 +49,8 @@ public enum JsfVersion {
     public boolean isAtLeast(@NonNull JsfVersion jsfVersion) {
         return this.ordinal() >= jsfVersion.ordinal();
     }
+
+    public static JsfVersion latest() {
+        return values()[values().length - 1];
+    }
 }

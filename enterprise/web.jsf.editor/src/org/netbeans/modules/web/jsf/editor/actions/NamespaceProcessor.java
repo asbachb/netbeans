@@ -45,6 +45,7 @@ import org.netbeans.modules.web.jsf.editor.JsfUtils;
 import org.netbeans.modules.web.jsf.editor.actions.ImportData.VariantItem;
 import org.netbeans.modules.web.jsf.editor.hints.LibraryDeclarationChecker;
 import org.netbeans.modules.web.jsfapi.api.DefaultLibraryInfo;
+import org.netbeans.modules.web.jsfapi.api.JsfVersion;
 import org.netbeans.modules.web.jsfapi.api.Library;
 import org.netbeans.modules.web.jsfapi.api.NamespaceUtils;
 
@@ -78,7 +79,7 @@ class NamespaceProcessor {
         final ImportData importData = new ImportData();
 
         // use JSF 2.2 namespaces?
-        importData.isJsf22 = jsfSupport == null ? false : jsfSupport.isJsf22Plus();
+        importData.isJsf22 = jsfSupport == null ? false : jsfSupport.getJsfVersion().isAtLeast(JsfVersion.JSF_2_2);
 
         // unused declarations
         for (Attribute namespaceAttribute : resultCollector.getUnusedNamespaces()) {
@@ -131,7 +132,7 @@ class NamespaceProcessor {
             String ns = it.next();
             Library library = supportedLibraries.get(ns);
             if (prefix.equals(library.getDefaultPrefix())) {
-                if (jsfSupport != null && jsfSupport.isJsf22Plus()) {
+                if (jsfSupport != null && jsfSupport.getJsfVersion().isAtLeast(JsfVersion.JSF_2_2)) {
                     ns = library.getNamespace();
                 }
                 result.add(new VariantItem(prefix, ns, library));
@@ -142,7 +143,7 @@ class NamespaceProcessor {
         // complete the remaining items
         for (String remainingNs : sortedList) {
             Library library = supportedLibraries.get(remainingNs);
-            if (jsfSupport != null && jsfSupport.isJsf22Plus()) {
+            if (jsfSupport != null && jsfSupport.getJsfVersion().isAtLeast(JsfVersion.JSF_2_2)) {
                     remainingNs = library.getNamespace();
                 }
             result.add(new VariantItem(prefix, remainingNs, library));

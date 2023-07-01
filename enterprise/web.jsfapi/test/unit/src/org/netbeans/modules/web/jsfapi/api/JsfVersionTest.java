@@ -176,4 +176,9 @@ public class JsfVersionTest {
         assertEquals("JSF 3.0", JsfVersion.JSF_3_0.getShortName());
         assertEquals("JSF 4.0", JsfVersion.JSF_4_0.getShortName());
     }
+
+    @Test
+    public void testLatest() {
+        assertEquals(JsfVersion.JSF_4_0, JsfVersion.latest());
+    }
 }
