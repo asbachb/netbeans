@@ -36,10 +36,11 @@ import org.netbeans.api.project.Sources;
 import org.netbeans.modules.j2ee.metadata.model.api.MetadataModel;
 import org.netbeans.modules.parsing.api.Source;
 import org.netbeans.modules.web.api.webmodule.WebModule;
-import org.netbeans.modules.web.jsf.api.facesmodel.JSFVersion;
+import org.netbeans.modules.web.jsf.api.facesmodel.JsfVersionUtils;
 import org.netbeans.modules.web.jsf.editor.facelets.FaceletsLibrarySupport;
 import org.netbeans.modules.web.jsf.editor.index.JsfIndex;
 import org.netbeans.modules.web.jsfapi.api.JsfSupport;
+import org.netbeans.modules.web.jsfapi.api.JsfVersion;
 import org.netbeans.modules.web.jsfapi.api.Library;
 import org.netbeans.modules.web.jsfapi.api.NamespaceUtils;
 import org.netbeans.modules.web.jsfapi.spi.JsfSupportProvider;
@@ -270,9 +271,9 @@ public class JsfSupportImpl implements JsfSupport {
     @Override
     public boolean isJsf22Plus() {
         if (wm != null) {
-            JSFVersion version = JSFVersion.forWebModule(wm);
+            JsfVersion version = JsfVersionUtils.forWebModule(wm);
             // caching is done inside the method
-            return version != null && version.isAtLeast(JSFVersion.JSF_2_2);
+            return version != null && version.isAtLeast(JsfVersion.JSF_2_2);
         }
         // return the latest supported one until somebody will complain about that
         return true;
@@ -281,9 +282,9 @@ public class JsfSupportImpl implements JsfSupport {
 		@Override
     public boolean isJsf30Plus() {
         if (wm != null) {
-            JSFVersion version = JSFVersion.forWebModule(wm);
+            JsfVersion version = JsfVersionUtils.forWebModule(wm);
             // caching is done inside the method
-            return version != null && version.isAtLeast(JSFVersion.JSF_3_0);
+            return version != null && version.isAtLeast(JsfVersion.JSF_3_0);
         }
         // return the latest supported one until somebody will complain about that
         return true;

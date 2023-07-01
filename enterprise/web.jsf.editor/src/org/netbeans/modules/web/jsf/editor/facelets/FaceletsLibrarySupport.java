@@ -42,10 +42,11 @@ import javax.servlet.ServletContext;
 import org.netbeans.api.progress.ProgressHandle;
 import org.netbeans.api.progress.ProgressHandleFactory;
 import org.netbeans.modules.web.jsf.api.editor.JsfFacesComponentsProvider;
-import org.netbeans.modules.web.jsf.api.facesmodel.JSFVersion;
+import org.netbeans.modules.web.jsf.api.facesmodel.JsfVersionUtils;
 import org.netbeans.modules.web.jsf.editor.JsfSupportImpl;
 import org.netbeans.modules.web.jsf.editor.facelets.mojarra.ConfigManager;
 import org.netbeans.modules.web.jsf.editor.index.IndexedFile;
+import org.netbeans.modules.web.jsfapi.api.JsfVersion;
 import org.netbeans.modules.web.jsfapi.api.Library;
 import org.netbeans.modules.web.jsfapi.api.LibraryType;
 import org.openide.filesystems.FileChangeAdapter;
@@ -410,8 +411,8 @@ public class FaceletsLibrarySupport {
         //4. in case of JSF2.2 include pseudo-libraries (http://java.sun.com/jsf/passthrough, http://java.sun.com/jsf)
         // right now, we have no idea whether such libraries will be included into the JSF bundle or not
         if (webModule != null) {
-            JSFVersion jsfVersion = JSFVersion.forWebModule(webModule);
-            if (jsfVersion != null && jsfVersion.isAtLeast(JSFVersion.JSF_2_2)) {
+            JsfVersion jsfVersion = JsfVersionUtils.forWebModule(webModule);
+            if (jsfVersion != null && jsfVersion.isAtLeast(JsfVersion.JSF_2_2)) {
                 libsMap.putAll(DefaultFaceletLibraries.getJsf22FaceletPseudoLibraries(this));
             }
         }

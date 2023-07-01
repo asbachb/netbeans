@@ -1,5 +1,5 @@
 #Signature file v4.1
-#Version 1.54
+#Version 1.55
 
 CLSS public abstract interface java.io.Serializable
 
@@ -137,6 +137,24 @@ cons public init()
 fld public final static java.lang.String JSF_XHTML_FILE_MIMETYPE = "text/facelets"
 meth public static boolean isFaceletsFile(org.openide.filesystems.FileObject)
 supr java.lang.Object
+
+CLSS public final !enum org.netbeans.modules.web.jsfapi.api.JsfVersion
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_1_0
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_1_1
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_1_2
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_2_0
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_2_1
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_2_2
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_2_3
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_3_0
+fld public final static org.netbeans.modules.web.jsfapi.api.JsfVersion JSF_4_0
+meth public boolean isAtLeast(org.netbeans.modules.web.jsfapi.api.JsfVersion)
+ anno 1 org.netbeans.api.annotations.common.NonNull()
+meth public java.lang.String getShortName()
+meth public static org.netbeans.modules.web.jsfapi.api.JsfVersion valueOf(java.lang.String)
+meth public static org.netbeans.modules.web.jsfapi.api.JsfVersion[] values()
+supr java.lang.Enum<org.netbeans.modules.web.jsfapi.api.JsfVersion>
+hfds version
 
 CLSS public abstract interface org.netbeans.modules.web.jsfapi.api.Library
 intf org.netbeans.modules.web.jsfapi.api.LibraryInfo

@@ -16,23 +16,37 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+package org.netbeans.modules.web.jsfapi.api;
 
-package org.netbeans.modules.web.jsf.api.facesmodel;
-
-import org.netbeans.modules.web.jsfapi.api.JsfVersion;
-import org.netbeans.modules.xml.xam.dom.DocumentModel;
+import org.netbeans.api.annotations.common.NonNull;
 
 /**
  *
- * @author Petr Pisl
+ * @author Benjamin Asbach
  */
-public interface JSFConfigModel extends DocumentModel <JSFConfigComponent>{
+public enum JsfVersion {
     
-    
-    FacesConfig getRootComponent();
-    
-    JSFConfigComponentFactory getFactory();
-    
-    JsfVersion getVersion();
-    
+    JSF_1_0("1.0"),
+    JSF_1_1("1.1"),
+    JSF_1_2("1.2"),
+    JSF_2_0("2.0"),
+    JSF_2_1("2.1"),
+    JSF_2_2("2.2"),
+    JSF_2_3("2.3"),
+    JSF_3_0("3.0"),
+    JSF_4_0("4.0");
+
+    private final String version;
+
+    private JsfVersion(String version) {
+        this.version = version;
+    }
+
+    public String getShortName() {
+        return "JSF " + version;
+    }
+
+    public boolean isAtLeast(@NonNull JsfVersion jsfVersion) {
+        return this.ordinal() >= jsfVersion.ordinal();
+    }
 }
